@@ -1,121 +1,133 @@
-<div align="center">
-       <canvas id="sunSystemCanvas" width="1000" height="1000" style="background-color: rgb(2, 2, 2);">
-       </canvas>
-</div>
-<script type="text/javascript">
-       var sunImg = new Image();
-       var moonImg = new Image();
-       var earthImg = new Image();
-       var earth2Img = new Image();
-       var earthImg2 = new Image();
-       var earthImg3 = new Image();
-       var earthImg4 = new Image();
-       var earthImg5 = new Image();
-       var earthImg6 = new Image();
-       var earthImg7 = new Image();
-       var earthImg8 = new Image();
-       var earthImg9 = new Image();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+       <div>
+              <canvas id="sunSystemCanvas" width="1000" height="1000" style="background-color: rgb(2, 2, 2);">
+              </canvas>
+       </div>
+	<script type="text/javascript">
+              var sunImg = new Image();
+              var moonImg = new Image();
+              var earthImg = new Image();
+              var earth2Img = new Image();
+              var earthImg2 = new Image();
+              var earthImg3 = new Image();
+              var earthImg4 = new Image();
+              var earthImg5 = new Image();
+              var earthImg6 = new Image();
+              var earthImg7 = new Image();
+              var earthImg8 = new Image();
+              var earthImg9 = new Image();
+       
+              function init() {
+                     sunImg.src = 'sun.png';
+                     //moonImg.src = 'moon.png';
+                     earthImg.src = 'earth.png';
+                     earthImg2.src = 'u.jpg';
+                     earthImg3.src = 's.jpg';
+                     earthImg4.src = 'mars.jpg';
+                     earthImg5.src = 'v.jpg'; 
+                     earthImg6.src = 'moon.png';
+                     earthImg7.src = '3.png';
+                     earthImg8.src = '4.png';
+                     earthImg9.src = 'moon.png';
+       
+       
+                     window.requestAnimationFrame(draw);
+              }
+       
+       
+              function draw() {
+                     var canvas = document.getElementById('sunSystemCanvas');
+                     var ctx = canvas.getContext('2d');
+                     ctx.globalCompositeOperation = 'destination-over';
+                     var width = canvas.width;
+                     var height = canvas.height;
+                     var cx = Math.floor(width / 2);
+                     var cy = Math.floor(height / 2);
+                     var earthDelta = Math.floor(0.15 * Math.min(width, height));
+                     var earthDelta2 = earthDelta + 30;/////////////////////////////////////////
+                     var moonDelta = Math.floor(0.095 * Math.min(width, height));
+       
+                     ctx.clearRect(0, 0, width, height);
+                     var time = new Date();
+       
+                     ctx.save();
+                     ctx.translate(cx, cy);
+       
+       
+                     var P2 = 2 * Math.PI;
+                     var earthSpeed = 60;
+                     ctx.rotate((P2 / earthSpeed) * time.getSeconds() + (P2 / (earthSpeed * 1000)) * time.getMilliseconds());
+                     //ctx.translate(earth2Delta, 0);/////////////////////////////////////////////
+                     ctx.translate(earthDelta, 0);
+                     //ctx.translate(earthDelta2, 0);
+                     //ctx.translate(earthDelta*2, 0);// blasset la terre  // ki nahiha tani la lune tdor f nos 3la chams
+                     var halfOfEarth = -1 * Math.floor(earthImg.width / 2);
+                     ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                     ctx.fillRect(0, halfOfEarth, moonDelta + moonImg.width, earthImg.width);
+                     ctx.drawImage(earthImg, halfOfEarth, halfOfEarth);
+                     ctx.drawImage(earthImg2, halfOfEarth+90, halfOfEarth+90);
+                     ctx.drawImage(earthImg3, halfOfEarth+120, halfOfEarth+120);
+                     ctx.drawImage(earthImg4, halfOfEarth+60, halfOfEarth+60);
+                     ctx.drawImage(earthImg5, halfOfEarth-30, halfOfEarth-30);
+                     ctx.drawImage(earthImg6, halfOfEarth+30, halfOfEarth+30);
+                     ctx.drawImage(earthImg7, halfOfEarth, halfOfEarth);
+                     ctx.drawImage(earthImg8, halfOfEarth-90, halfOfEarth-90);
+                     ctx.drawImage(earthImg9, halfOfEarth, halfOfEarth);
+       
+                    
+       
+       
+                     var earthSpeed = 30;
+                     //ctx.rotate((P2 / earthSpeed) * time.getSeconds() + (P2 / (earthSpeed * 1000)) * time.getMilliseconds());
+       
+                 
+       
+       
+                     //ctx.save();
+                     
+                     ctx.restore();
+                     ctx.restore();
+       
+                     ctx.strokeStyle = 'rgba(0, 204, 255, 0.45)';
+                     ctx.setLineDash([2, 4]);
+                     ctx.beginPath();
+                     ctx.arc(cx, cy, earthDelta - 50, 0, Math.PI * 2, false);
+                     ctx.arc(cx, cy, earthDelta +250, 0, Math.PI * 2, false);
+                     //ctx.arc(cx, cy, (earthDelta*0.7), 0, Math.PI * 2, false);//la terre
+                     //ctx.arc(cx, cy, earthDelta*0.9, 0, Math.PI *2, false);
+                     ctx.arc(cx, cy, earthDelta, 0, Math.PI * 2, false);
+                     ctx.arc(cx, cy, earthDelta +290, 0, Math.PI * 2, false);
+                     ctx.arc(cx, cy, earthDelta + 50, 0, Math.PI * 2, false);//ouranous
+                     ctx.arc(cx, cy, earthDelta + 100, 0, Math.PI * 2, false);//neptone
+                     ctx.arc(cx, cy, earthDelta + 150, 0, Math.PI * 2, false);// ploto
+                     ctx.arc(cx, cy, earthDelta + 200, 0, Math.PI * 2, false);//ouranous
+                     // ctx.arc(cx, cy, earthDelta-120, 0, Math.PI * 2, false);//neptone
+                     ctx.arc(cx, cy, earthDelta +330, 0, Math.PI * 2, false);// ploto
+                     ctx.stroke();
+       
+       
+                     ctx.save();// koun nahiha yjiw 2 wahda ltaht w wahda normal w tswira ta3 la lune teb9a fi blassa wahda
+                     ctx.translate(cx, cy); //chems tetla3 f coin gauch lfoug  khlas 
+                     var halfOfSun = -1 * Math.floor(sunImg.width / 2); //tswira ta3 la lune jamda fi blassa w koul manactualisi tetbadal blasseteha 
+                     ctx.drawImage(sunImg, halfOfSun, halfOfSun); // rahat chems
+                     ctx.restore();// 2 tssawer tani
+       
+                     window.requestAnimationFrame(draw);// ça bouge 
+              }
+       
+              window.onload = init;
+       </script>
+       <noscript>
+       
+       </noscript>
+</body>
+</html>
 
-       function init() {
-              sunImg.src = 'sun.png';
-              //moonImg.src = 'moon.png';
-              earthImg.src = 'earth.png';
-              earthImg2.src = 'u.jpg';
-              earthImg3.src = 's.jpg';
-              earthImg4.src = 'mars.jpg';
-              earthImg5.src = 'v.jpg'; 
-              earthImg6.src = 'moon.png';
-              earthImg7.src = '3.png';
-              earthImg8.src = '4.png';
-              earthImg9.src = 'moon.png';
-
-
-              window.requestAnimationFrame(draw);
-       }
-
-
-       function draw() {
-              var canvas = document.getElementById('sunSystemCanvas');
-              var ctx = canvas.getContext('2d');
-              ctx.globalCompositeOperation = 'destination-over';
-              var width = canvas.width;
-              var height = canvas.height;
-              var cx = Math.floor(width / 2);
-              var cy = Math.floor(height / 2);
-              var earthDelta = Math.floor(0.15 * Math.min(width, height));
-              var earthDelta2 = earthDelta + 30;/////////////////////////////////////////
-              var moonDelta = Math.floor(0.095 * Math.min(width, height));
-
-              ctx.clearRect(0, 0, width, height);
-              var time = new Date();
-
-              ctx.save();
-              ctx.translate(cx, cy);
-
-
-              var P2 = 2 * Math.PI;
-              var earthSpeed = 60;
-              ctx.rotate((P2 / earthSpeed) * time.getSeconds() + (P2 / (earthSpeed * 1000)) * time.getMilliseconds());
-              //ctx.translate(earth2Delta, 0);/////////////////////////////////////////////
-              ctx.translate(earthDelta, 0);
-              //ctx.translate(earthDelta2, 0);
-              //ctx.translate(earthDelta*2, 0);// blasset la terre  // ki nahiha tani la lune tdor f nos 3la chams
-              var halfOfEarth = -1 * Math.floor(earthImg.width / 2);
-              ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-              ctx.fillRect(0, halfOfEarth, moonDelta + moonImg.width, earthImg.width);
-              ctx.drawImage(earthImg, halfOfEarth, halfOfEarth);
-              ctx.drawImage(earthImg2, halfOfEarth+90, halfOfEarth+90);
-              ctx.drawImage(earthImg3, halfOfEarth+120, halfOfEarth+120);
-              ctx.drawImage(earthImg4, halfOfEarth+60, halfOfEarth+60);
-              ctx.drawImage(earthImg5, halfOfEarth-30, halfOfEarth-30);
-              ctx.drawImage(earthImg6, halfOfEarth+30, halfOfEarth+30);
-              ctx.drawImage(earthImg7, halfOfEarth, halfOfEarth);
-              ctx.drawImage(earthImg8, halfOfEarth-90, halfOfEarth-90);
-              ctx.drawImage(earthImg9, halfOfEarth, halfOfEarth);
-
-             
-
-
-              var earthSpeed = 30;
-              //ctx.rotate((P2 / earthSpeed) * time.getSeconds() + (P2 / (earthSpeed * 1000)) * time.getMilliseconds());
-
-          
-
-
-              //ctx.save();
-              
-              ctx.restore();
-              ctx.restore();
-
-              ctx.strokeStyle = 'rgba(0, 204, 255, 0.45)';
-              ctx.setLineDash([2, 4]);
-              ctx.beginPath();
-              ctx.arc(cx, cy, earthDelta - 50, 0, Math.PI * 2, false);
-              ctx.arc(cx, cy, earthDelta +250, 0, Math.PI * 2, false);
-              //ctx.arc(cx, cy, (earthDelta*0.7), 0, Math.PI * 2, false);//la terre
-              //ctx.arc(cx, cy, earthDelta*0.9, 0, Math.PI *2, false);
-              ctx.arc(cx, cy, earthDelta, 0, Math.PI * 2, false);
-              ctx.arc(cx, cy, earthDelta +290, 0, Math.PI * 2, false);
-              ctx.arc(cx, cy, earthDelta + 50, 0, Math.PI * 2, false);//ouranous
-              ctx.arc(cx, cy, earthDelta + 100, 0, Math.PI * 2, false);//neptone
-              ctx.arc(cx, cy, earthDelta + 150, 0, Math.PI * 2, false);// ploto
-              ctx.arc(cx, cy, earthDelta + 200, 0, Math.PI * 2, false);//ouranous
-              // ctx.arc(cx, cy, earthDelta-120, 0, Math.PI * 2, false);//neptone
-              ctx.arc(cx, cy, earthDelta +330, 0, Math.PI * 2, false);// ploto
-              ctx.stroke();
-
-
-              ctx.save();// koun nahiha yjiw 2 wahda ltaht w wahda normal w tswira ta3 la lune teb9a fi blassa wahda
-              ctx.translate(cx, cy); //chems tetla3 f coin gauch lfoug  khlas 
-              var halfOfSun = -1 * Math.floor(sunImg.width / 2); //tswira ta3 la lune jamda fi blassa w koul manactualisi tetbadal blasseteha 
-              ctx.drawImage(sunImg, halfOfSun, halfOfSun); // rahat chems
-              ctx.restore();// 2 tssawer tani
-
-              window.requestAnimationFrame(draw);// ça bouge 
-       }
-
-       window.onload = init;
-</script>
-<noscript>
-
-</noscript>
